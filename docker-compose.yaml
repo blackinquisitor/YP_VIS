@@ -1,0 +1,20 @@
+version: '3.5'
+networks:
+  php-network:
+services:
+  nginx:
+    image: nginx
+    ports:
+      - '8080:80'
+    volumes:
+      - ./:/var/www/
+      - ./nginx:/etc/nginx/conf.d
+    networks:
+      - php-network
+  php:
+    image:
+      php:8.1.2-fpm
+    volumes:
+      - ./:/var/www/
+    networks:
+      - php-network
